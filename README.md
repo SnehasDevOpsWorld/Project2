@@ -33,4 +33,29 @@ git add .
 git commit -m "Fix: remove nested git repo"
 git push origin main
 
+Problem 2 : 🔍 Why Git says “nothing to commit”
+
+Even after deleting .git inside formfillapp, Git is still not detecting changes because:
+
+👉 The folder was already tracked as a submodule (pointer) earlier
+👉 Removing .git alone doesn’t convert it back to normal files
+
+So Git still thinks:
+
+“formfillapp is just a reference, not actual content”
+
+✅ Proper fix (you need to re-add the folder correctly)
+
+Run these steps carefully inside your Project2 repo:
+
+1. Remove old submodule reference
+git rm --cached formfillapp
+👉 This removes the “pointer” tracking (not your files)
+
+2. Add files again as normal folder
+git add formfillapp
+3. Commit changes
+git commit -m "Convert formfillapp from submodule to normal folder"
+4. Push
+
 Now refresh GitHub — the folder will open normally.
