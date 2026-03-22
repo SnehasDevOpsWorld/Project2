@@ -65,7 +65,7 @@ git commit -m "Convert formfillapp from submodule to normal folder"
 ----------------------------------------------------------------------------------------
 
 Problem 3 :
-📌 Using sed to get JAVA path
+📌 Using sed to get JAVA path (Learned about sed command , apart from head and tail command)
 
 While creating jenkins_setup.sh, we used:
 
