@@ -75,5 +75,15 @@ This command prints the 3rd line from the output, which gives a specific Java in
 
 It helps to automatically set JAVA_HOME in the script without manually checking or editing environment variables.
 
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+Problem 4: 
+📌 Fixed Java source and target version in pom.xml
+
+as we installed Java21 version, and there in java 7 target and source version, which is very old for compatiblity with Java21 .
+so for that we changed target and source version in pom.xml to java 8 , which is minimum compatible version.
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
 JAVA_HOME=$(find /usr/lib/jvm/java-21* -maxdepth 0 | sed -n '3p')
 Now refresh GitHub — the folder will open normally.
