@@ -32,6 +32,9 @@ rm -rf formfillapp/.git
 git add .
 git commit -m "Fix: remove nested git repo"
 git push origin main
+|
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
 Problem 2 : 🔍 Why Git says “nothing to commit”
 
@@ -58,4 +61,19 @@ git add formfillapp
 git commit -m "Convert formfillapp from submodule to normal folder"
 4. Push
 
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+Problem 3 :
+📌 Using sed to get JAVA path
+
+While creating jenkins_setup.sh, we used:
+
+find /usr/lib/jvm/java-21* -maxdepth 0 | sed -n '3p'
+
+This command prints the 3rd line from the output, which gives a specific Java installation path.
+
+It helps to automatically set JAVA_HOME in the script without manually checking or editing environment variables.
+
+JAVA_HOME=$(find /usr/lib/jvm/java-21* -maxdepth 0 | sed -n '3p')
 Now refresh GitHub — the folder will open normally.
