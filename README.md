@@ -39,7 +39,7 @@ This project sets up a **CI/CD pipeline** where:
       ↓
 🐙 GitHub Repository (Project2)
       |
-      | webhook / manual trigger
+      | poll SCM / manual trigger
       ↓
 ⚙️  Jenkins Server (EC2 + Elastic IP + Port 8080)
       |  - Pulls code from GitHub
@@ -344,7 +344,7 @@ Project2/
 
 ## 👩‍💻 Author
 
-**Sneha** — DevOps Learning Project
+**Sneha Soni** — DevOps Learning Project
 - GitHub: [@SnehasDevOpsWorld](https://github.com/SnehasDevOpsWorld)
 
 ---
