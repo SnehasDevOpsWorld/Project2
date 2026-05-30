@@ -1,90 +1,129 @@
-🧩 Problem 1: Folder visible on GitHub but not opening
+# Troubleshooting Guide
 
-You said:
+## Problem 1: Folder Visible on GitHub but Not Opening
 
-“I can see formfillapp folder in Project2 repo, but can’t open it”
+### Issue
 
-👉 This usually means:
+The `formfillapp` folder was visible inside the `Project2` repository but could not be opened on GitHub.
 
-The folder was pushed as a Git submodule, not actual files.
-💥 Why this happens
+### Cause
 
-You cloned one repo (formfillapp) and then copied it into another repo (Project2) without removing its .git folder.
+This usually happens when a folder is added as a **Git submodule** instead of normal project files.
 
-So Git treated it as a nested repository, not normal files.
-🔍 How to confirm
+This can occur if you:
 
-On your server, run:
+* Clone a repository (`formfillapp`)
+* Copy it into another repository (`Project2`)
+* Forget to remove the internal `.git` directory
 
+Git then treats the folder as a **nested repository** rather than regular files.
+
+### Verify the Issue
+
+Navigate into the folder:
+
+```bash
 cd Project2/formfillapp
 ls -a
+```
 
 If you see:
 
+```bash
 .git
+```
 
-👉 That’s the issue.
-✅ Fix it (important)
+the folder is being treated as a nested Git repository.
 
-Run this inside Project2:
+### Fix
 
+Remove the internal Git metadata:
+
+```bash
 rm -rf formfillapp/.git
 git add .
-git commit -m "Fix: remove nested git repo"
+git commit -m "Fix: remove nested git repository"
 git push origin main
-|
-----------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------
+```
 
-Problem 2 : 🔍 Why Git says “nothing to commit”
+---
 
-Even after deleting .git inside formfillapp, Git is still not detecting changes because:
+## Problem 2: Git Shows "Nothing to Commit"
 
-👉 The folder was already tracked as a submodule (pointer) earlier
-👉 Removing .git alone doesn’t convert it back to normal files
+### Issue
 
-So Git still thinks:
+After deleting the `.git` folder inside `formfillapp`, Git still reported:
 
-“formfillapp is just a reference, not actual content”
+```bash
+nothing to commit
+```
 
-✅ Proper fix (you need to re-add the folder correctly)
+### Cause
 
-Run these steps carefully inside your Project2 repo:
+Removing `.git` alone does not fully solve the issue.
 
-1. Remove old submodule reference
+The folder had already been tracked as a **Git submodule reference** (pointer).
+
+Git still considered `formfillapp` a linked repository instead of normal project content.
+
+### Fix
+
+#### Step 1: Remove the Existing Submodule Reference
+
+```bash
 git rm --cached formfillapp
-👉 This removes the “pointer” tracking (not your files)
+```
 
-2. Add files again as normal folder
+This removes Git’s stored submodule tracking reference.
+
+#### Step 2: Add the Folder Again as Normal Files
+
+```bash
 git add formfillapp
-3. Commit changes
+```
+
+#### Step 3: Commit Changes
+
+```bash
 git commit -m "Convert formfillapp from submodule to normal folder"
-4. Push
+```
 
-----------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------
+#### Step 4: Push Changes
 
-Problem 3 :
-📌 Using sed to get JAVA path (Learned about sed command , apart from head and tail command)
+```bash
+git push origin main
+```
 
-While creating jenkins_setup.sh, we used:
+The folder should now behave like a standard directory in GitHub.
 
+---
+
+## Problem 3: Using `sed` to Extract JAVA_HOME Path
+
+### Context
+
+While creating `jenkins_setup.sh`, the following command was used:
+
+```bash
 find /usr/lib/jvm/java-21* -maxdepth 0 | sed -n '3p'
+```
 
-This command prints the 3rd line from the output, which gives a specific Java installation path.
+### Explanation
 
-It helps to automatically set JAVA_HOME in the script without manually checking or editing environment variables.
+* `find` searches for Java 21 installation directories.
+* `sed -n '3p'` prints the **third line** from the output.
 
-----------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------
-Problem 4: 
-📌 Fixed Java source and target version in pom.xml
+This helps dynamically retrieve a Java installation path without manually checking the system.
 
-as we installed Java21 version, and there in java 7 target and source version, which is very old for compatiblity with Java21 .
-so for that we changed target and source version in pom.xml to java 8 , which is minimum compatible version.
+Example:
 
-----------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------
+```bash
 JAVA_HOME=$(find /usr/lib/jvm/java-21* -maxdepth 0 | sed -n '3p')
-Now refresh GitHub — the folder will open normally.
+```
 
+This value can then be assigned automatically to `JAVA_HOME`.
+
+---
+
+
+This improves compatibility with the installed Java 21 environment.
