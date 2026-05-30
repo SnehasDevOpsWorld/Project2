@@ -15,7 +15,7 @@
     <!-- Header -->
     <header class="header">
       <div class="header-inner">
-        <span class="logo">⚙️ DevOps Project</span>
+        <span class="logo">⚙️Sneha's DevOps Project</span>
         <span class="version-badge">v2.1-SNAPSHOT</span>
       </div>
     </header>
