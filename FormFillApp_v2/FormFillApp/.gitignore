@@ -1,0 +1,43 @@
+# ============================================================
+#   .gitignore — FormFillApp
+#   DevOps CI/CD Project by Sneha Soni
+# ============================================================
+
+# Maven build output - never commit these
+target/
+*.war
+*.jar
+*.class
+
+# IDE files - not needed in repo
+.idea/
+*.iml
+.eclipse/
+.settings/
+.project
+.classpath
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Environment / secrets - NEVER commit these
+.env
+secrets.properties
+db.properties
+
+# ============================================================
+#   IMPORTANT FOR PROJECT 2.1:
+#   Never commit AWS credentials or RDS passwords to GitHub.
+#   Store them in:
+#     - Jenkins Credentials Manager
+#     - AWS Secrets Manager
+#     - Environment variables on EC2
+# ============================================================

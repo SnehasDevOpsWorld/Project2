@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  web.xml — Deployment Descriptor
+  Servlet version: 5.0 (compatible with Tomcat 10+ / Jakarta EE 9+)
+
+  Note: RegistrationServlet is mapped via @WebServlet annotation,
+  so it doesn't need to be declared here.
+  This file handles global app config only.
+-->
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+  <display-name>FormFillApp</display-name>
+  <description>User Registration App - DevOps CI/CD Project by Sneha Soni</description>
+
+  <!-- Default welcome page -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- Custom 404 error page -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/index.jsp</location>
+  </error-page>
+
+  <!-- Custom 500 error page -->
+  <error-page>
+    <error-code>500</error-code>
+    <location>/index.jsp</location>
+  </error-page>
+
+  <!--
+    TODO Project 2.1: Add DB connection pool (JNDI) config here
+    when AWS RDS is connected. Example:
+
+    <resource-ref>
+      <description>DB Connection Pool</description>
+      <res-ref-name>jdbc/registrationdb</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+    </resource-ref>
+  -->
+
+</web-app>
